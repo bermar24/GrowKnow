@@ -1,4 +1,4 @@
-# **GrowNow**
+# **GrowKnow**
 
 ## 🌍 Vision & Mission  
 We are building a **central hub** that consolidates the latest developments in AI, organizes tools by real utility, and provides **structured learning paths for IT professionals**.  
