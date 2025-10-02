@@ -30,27 +30,30 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-This Software Requirements Specification (SRS) describes all specifications for the application "Common Playground". It includes an overview about this project and its vision, detailed information about the planned features and boundary conditions of the development process.
+This Software Requirements Specification (SRS) describes all specifications for the application "GrowKnow". It includes an overview of the project and its vision, detailed information about the planned features, and the boundary conditions of the development process.
 
 
 ### 1.2 Scope
-The project is going to be realized as an Android App.  
-  
-Actors of this App can be users or moderators.  
+The project is going to be realized as a web-based platform that consolidates current AI developments, organizes tools, and provides structured learning paths for IT professionals.
+
+Actors of this platform can be Visitors, Registered Users, Admins, or the Automation Orchestrator (n8n). 
   
 Planned Subsystems are: 
-* Notice Board:  
-The notice board is the essential part of the user interface. Game sessions should be visualized as postings including relevant information about the session. Those should be partly standardized by a form with a free text option for specifics. The data must be stored accordingly.
-* Account System:  
-Users can create accounts so sessions can be connected to a person as well as to join requests. User data must be stored alongside the posting data.
-* Friend List and User Rating:  
-Once the account system is created there will be the option to mark users as favorites. Also users or game sessions should get a rating to counter abuse.
-* Connecting People:  
-The host of a game session has to be notified when someone wants to join their game. Both must then be able to get in touch to organize the details, so messages between the host and the guest have to be enabled. This could be done via automated emails or a custom in-app system. For this an account system is needed.
-* Storing Data:  
-User data for accounts and possibly profiles has to be stored. Also the game sessions have to be stored as datasets containing the form contents and possibly contact data. The data storage will form the foundation for the visualization, account system and the search feature.
-* Finding your Game:  
-We need a tag system so everyone looking to join a game can search for the kind of games they are interested in. Possibly other aspects can be searchable, such as place or date. Tags must be stored and a search function developed. 
+
+* AI News Feed & Newsletter:
+At the core, an automated feed consolidates vetted AI sources. Articles are deduplicated, summarized, and tagged with metadata (source, date, relevance, use case). They are published on the platform and distributed through a weekly newsletter.
+
+* AI Tool Directory:
+A curated repository of AI tools, categorized by tasks (generate, analyze, automate, build, secure). Each tool includes metadata such as domains, alternatives, integration effort, and example workflows. Users can filter by goal, budget, and maturity.
+
+* Role-Based Learning Roadmaps:
+Roadmaps for roles like Data Engineer, ML Engineer, DevOps, or Security Engineer. Each roadmap includes ordered learning objectives, resources, and practice tasks.
+
+* Account & Feedback System:
+Registered users can subscribe to newsletters, suggest new tools/sources, and provide corrections.
+
+* Administration & Data Pipelines:
+Admins manage content review, user roles, and automation pipelines for ingestion, embeddings, and fact-checking. Automations (via n8n) handle crawling, newsletter generation, and triggers.
 
 ### 1.3 Definitions, Acronyms and Abbreviations
 | Abbrevation | Explanation                            |
@@ -64,10 +67,11 @@ We need a tag system so everyone looking to join a game can search for the kind 
 
 ### 1.4 References
 
-| Title                                                              | Date       | Publishing organization   |
-| -------------------------------------------------------------------|:----------:| ------------------------- |
-| [Common Playground Blog](http://commonplayground.wordpress.com)    | 18.10.2018 | Common Playground Team    |
-| [GitHub](https://github.com/nilskre/CommonPlayground)              | 18.10.2018 | Common Playground Team    |
+| Title                                                                 |    Date    | Publishing organization |
+| --------------------------------------------------------------------- | :--------: | ----------------------- |
+| [GrowKnow Blog – Project Vision](#)                                   | 2025-09-25 | GrowKnow Team           |
+| [GrowKnow Blog – Team & Technology](#)                                | 2025-09-26 | GrowKnow Team           |
+| [GitHub Repository](https://github.com/bermar24/GrowKnow)             | 2025-10-01 | GrowKnow Team           |
 
 
 ### 1.5 Overview
@@ -76,7 +80,15 @@ The following chapter provides an overview of this project with vision and Overa
 ## 2. Overall Description
 
 ### 2.1 Vision
-Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzentrale’ we want to build an application to coordinate game sessions. We plan to create a platform for people who are looking for other people to play games with. Covering online multiplayer games, tabletop, pen and paper or regular board games we want to provide a kind of bulletin board where people can state what they want to play, when and where they want to do it and how many people they are looking for. Others can then react to the postings and virtually join the play session to be connected by us so everyone can coordinate the actual play session together on a Common Playground.
+We aim to build a central hub for AI professionals. The platform consolidates AI news, organizes tools by utility, and offers structured learning roadmaps. The goals are:
+* Provide orientation without noise.
+* Support faster and more confident technology decisions.
+* Enable measurable progress in AI/IT learning paths.
+
+The system will be delivered iteratively:
+1. MVP (by December): News feed, newsletter, tool search & filtering, and initial roadmaps.
+2. Next phase: Expansion of the tool directory and roadmap coverage.
+3. Later: More advanced feedback loops, contributor system, and extended automation.
 
 ### 2.2 Use Case Diagram
 
@@ -88,118 +100,103 @@ Inspired by carpool coordination services like ‘BlaBlaCar’ or ‘Mitfahrzent
 ### 2.3 Technology Stack
 The technology we use is:
 
-Backend:
--Gradle and Springboot
--H2 Database
-
 Frontend:
--Android with Java and XML
 
-IDE:
--IntelliJ and Android Studio
+* React
+
+Backend:
+
+* Node.js (API services)
+* Supabase (Postgres-based DB with authentication)
+
+Automation:
+
+* n8n (workflow automation for crawling, newsletter runs, fact-checking)
+
+Search & Data Processing:
+
+* OpenSearch / Elasticsearch
 
 Project Management:
--YouTrack
--GitHub
--Microsoft Teams
 
-Deployment:
--Travis CI
--Docker and Heroku
+* GitHub
+* Rational Unified Process (RUP) iteration planning - YouTrack
+
+Deployment & DevOps:
+
+* CI/CD pipelines (planned)
+* Containerized environments (Docker/Kubernetes considered)
 
 Testing:
--Cucumber
--Espresso
--JUnit
--Codacy
--CodeMR
--RestAssured
+
+* Jest / Cypress (frontend & API)
+* Manual + automated test cases for newsletter generation and search filters
 
 ## 3. Specific Requirements
 
 ### 3.1 Functionality
-This section will explain the different use cases, you could see in the Use Case Diagram, and their functionality.  
-Until December we plan to implement:
-- 3.1.1 Posting a session
-- 3.1.2 Getting an overview
-- 3.1.3 Creating an account
-- 3.1.4 Logging in
-- 3.1.5 Logging out
+This section explains the different use cases shown in the Use Case Diagram and their functionality.
 
-Until June, we want to implement:
-- 3.1.6 Joining a session
-- 3.1.7 Keeping track of your sessions
-- 3.1.8 Leaving a session
-- 3.1.9 Finding a session
-- 3.1.10 Getting in touch
+Until December (MVP) we plan to implement:
+- 3.1.1 Browse AI News
+- 3.1.2 Subscribe to Newsletter
+- 3.1.3 Receive Weekly Newsletter
+- 3.1.4 Search & Filter Tools
+- 3.1.5 Explore Learning Roadmaps
 
-#### 3.1.1 Posting a session
-This feature is the essential one of our project. The user gets the possibility to post a session. Therefore, they have to select a game and also set the time when they want to play.For offline games, they have to set a location, too. For online games the location can be a server for example or simply be tagged as 'online'.
+For later releases we plan to implement:
+- 3.1.6 Suggest New Tools/Sources
+- 3.1.7 Provide Feedback / Corrections
+- 3.1.8 Admin Panel
+- 3.1.9 Manage Database & Pipelines
+- 3.1.10 Manage Users & Roles
+- 3.1.11 Trigger Newsletter Run (via n8n)
+- 3.1.12 Review/Edit/Publish Articles
+- 3.1.1 Browse AI News
 
-[Posting a session](./use_cases/UC1_Post_Session.md)
+Visitors can read and navigate through the latest AI news, which are automatically collected, summarized, and tagged.
 
-#### 3.1.2 Getting an overview
-This feature provides a basic overview over all current sessions. All posted sessions are added here. From this overview you can select a session and from there join this session.
+#### 3.1.2 Subscribe to Newsletter
+Registered users can subscribe to receive the weekly newsletter.
 
-[Session overview](./use_cases/UC3_Session_Overview.md)
+#### 3.1.3 Receive Weekly Newsletter
+Subscribers receive a curated newsletter summarizing the most relevant AI updates with source transparency.
 
-#### 3.1.3 Creating an account
-To identify all useres we need an account system. This account system enables us to build important functions such as joining a session, leaving a session or a personalized overview over all sessions (Keeping track of your sessions).
+#### 3.1.4 Search & Filter Tools
+Visitors and registered users can search and filter through the AI tool directory using categories, domains, and budget.
 
-[Create an account](./use_cases/UC4_Create_Account.md)
+#### 3.1.5 Explore Learning Roadmaps
+Users can navigate role-based roadmaps (e.g., Data Engineer, ML Engineer) with structured paths and linked resources.
 
-#### 3.1.4 Logging in
-The app will provide the possibility to register and log in. This will also make the usability easier when a user wants to manage his sessions, post or join a session because they don't have to enter their mail address every time.
+#### 3.1.6 Suggest New Tools/Sources
+Registered users can propose new tools or sources to be added to the directory.
 
-[Login](./use_cases/UC5_Login.md)
+#### 3.1.7 Provide Feedback / Corrections
+Registered users can suggest corrections or improvements to existing content.
 
-#### 3.1.5 Logging out
-In case you share your phone, have multiple accounts or just want to be cautius about your privacy you should be able to manually log out.
+#### 3.1.8 Admin Panel
+Admins access a dashboard for managing users, roles, and platform-wide settings.
 
-[Logout](./use_cases/UC6_Logout.md)
+#### 3.1.9 Manage Database & Pipelines
+Admins ensure the consistency and quality of stored news, tools, and roadmaps while managing automation pipelines.
 
-#### 3.1.6 Joining a session
-There is also the possibility to join an existing game session. Therefore, the user can select a specific session.
+#### 3.1.10 Manage Users & Roles
+Admins manage user accounts and assign or revoke roles.
 
-[Join a session](./use_cases/UC2_Join_Session.md)
+#### 3.1.11 Trigger Newsletter Run
+The automation orchestrator (n8n) can initiate newsletter generation and delivery.
 
-#### 3.1.7 Keeping track of your sessions
-The app provides the user with a seperate page view where they get an overview of all sessions they posted or joined. When the user clicks on a session, he can also see who joined his posted sessions.
-
-[Keeping track of your sessions](./use_cases/UC7_Keeping_Track.md)
-
-#### 3.1.8 Leaving a session
-The user gets also the possibility to delete a session he posted or to leave a session he joined.
-
-[Leaving a session](./use_cases/UC8_Leave_Session.md)
-
-#### 3.1.9 Finding a session
-Based on the overview over all sessions this features enables the user to find sessions by specific parameters. Therefore, the user can find a session by tags or other parameters like date. Later on, finding a session will be provided by geolocalization that the users can search for a session in a specific area.
-
-[Finding a session](./use_cases/UC9_Find_Session.md)
-
-#### 3.1.10 Getting in touch
-There must be the possibility that two people who want to play together can communicate with each other. The player who joins the session gets the possibility to contact the owner and vice versa. Later on, when we will have implemented profiles, then they will form another way to communicate with each other.
-
-[Getting in Touch](./use_cases/UC10_Getting_In_Touch.md)
-
-#### 3.1.11 Presenting yourself and checking out others
-With the possibility to log in there comes another functionality, the profile. Every user will have their own profile where they can write some informations about themselves. Because of the privacy policy in Europe, the user has the possibility to only write the information they want other people to see. Using the profile, users can also check out other players and learn e.g. their favorite games.
-
-#### 3.1.12 Reporting users and managing friends
-After a session, the app provides the users with the possibility to report the other participants. This is helpful because we want a community with fair players. Additionally, when they found an interesting person they can also add them to their friend list which also has a seperate page view.
-
-#### 3.1.13 Banning users and deleting posts
-There are also some functionalities for the admins. They will get the possibility to ban users and to delete any posts.
+#### 3.1.12 Review/Edit/Publish Articles
+Admins review automatically ingested articles before publishing them.
 
 ### 3.2 Usability
-We plan on designing the user interface as intuitive and self-explanatory as possible to make the user feel as comfortable as possible using the app. Though an FAQ document will be available, it should not be necessary to use it.
+We aim to design the GrowKnow platform with a clean, intuitive, and responsive interface. The user experience should feel natural, requiring no special training.
 
-#### 3.2.1 No training time needed
-Our goal is that a user installs the android application, opens it and is able to use all features without any explanation or help.
+#### 3.2.1 No Training Time Needed
+Users should be able to navigate the platform easily, discover tools, and subscribe without needing documentation.
 
 #### 3.2.2 Familiar Feeling
-We want to implement an app with familiar designs and functions. This way the user is able to interact in familiar ways with the app without having to get to know new interfaces.
+By using standard UI/UX patterns, GrowKnow feels familiar to users accustomed to modern platforms, reducing friction in adoption.
 
 ### 3.3 Reliability
 
@@ -212,33 +209,30 @@ Our goal is that we have no loss of any data. This is important so that the game
 ### 3.4 Perfomance
 
 #### 3.4.1 Capacity
-The system should be able to manage thousands of requests. Also it should be possible to register as many users as necessary.
+The system should scale to handle thousands of concurrent visitors, with newsletter delivery supporting large mailing lists.
 
 #### 3.4.2 Storage 
-Smartphones don't provide much storage. Therefore we are aiming to keep the needed storage as small as possible.
+Stored data (tools, articles, feedback) should be optimized for efficiency without sacrificing accessibility.
 
-#### 3.4.3 App perfomance / Response time
-To provide the best App perfomance we aim to keep the response time as low as possible. This will make the user experience much better.
+#### 3.4.3 Response time
+Pages and search queries should load within 1–2 seconds under normal load.
 
 ### 3.5 Supportability
 
 #### 3.5.1 Coding Standards
-We are going to write the code by using all of the most common clean code standards. For example we will name our variables and methods by their functionalities. This will keep the code easy to read by everyone and make further developement much easier.
+We will follow industry best practices and clean code principles for both backend (Node.js, Express) and frontend (React).
 
 #### 3.5.2 Testing Strategy
-The application will have a high test coverage and all important functionalities and edge cases should be tested. Further mistakes in the implementation will be discovered instantly and it will be easy to locate the error. 
+The system will use automated testing for core functionalities (user registration, newsletter, search). Unit, integration, and pipeline tests will ensure reliability.
 
 ### 3.6 Design Constraints
-We are trying to provide a modern and easy to handle design for the UI aswell as for the architecture of our application. To achieve that the functionalities will be kept as modular as possible.
-
-Because we are progamming an Android App we chose Java as our programming language. Also we are using the common MVC-architecture to keep the front end and back end seperated. For a clean front end structure we use MVVM.
-To make the communication between the two parts easy, we will implement a RESTful-API between them which will provide the data in JSON-Format. 
-The supported Platforms will be:
-- Android 4.4 and higher
-- Java 8 and higher
+* Modular architecture (frontend, backend, automation orchestrator).
+* RESTful APIs for data exchange.
+* Tech stack: React, Node.js, PostgreSQL, n8n for automation.
+* Hosted on scalable cloud infrastructure (e.g., Vercel, AWS).
 
 ### 3.7 On-line User Documentation and Help System Requirements
-The usage of the app should be as intuitive as possible so it won't need any further documentation. If the user needs some help we will implement a "Help"-Button in the App which includes a FAQ and a formular to contact the developement team.
+GrowKnow will provide a “Help” section with FAQs, tutorials, and contact forms. Most features are designed to be self-explanatory.
 
 ### 3.8 Purchased Components
 We don't have any purchased components yet. If there will be purchased components in the future we will list them here.
@@ -247,39 +241,38 @@ We don't have any purchased components yet. If there will be purchased component
 
 #### 3.9.1 User Interfaces
 The User interfaces that will be implented are:
-- Dashboard - lists all session and makes it possible to filter sessions
-- Session Page - shows detailed information about the session and makes it possible to connect session attendants for example via messaging system
-- Login - this page is used to log in 
-- Register - provides a registration form
-- Overwiew of personal sessions - shows all the sessions a user participates in
-- Friend List - friends can be added
-- Profile - makes it possible to post information about yourself, might provide messaging feature, also shows additional information about users (for example: Language, country, favorite games, etc.)
-- Settings - shows the settings
+- Dashboard: Lists AI news and tools with filters.
+- Roadmap Page: Displays curated learning roadmaps.
+- Newsletter: Subscription form and archive.
+- Admin Panel: Content, users, and pipeline management.
+- Profile Page: User account management.
 
 #### 3.9.2 Hardware Interfaces
 (n/a)
 
 #### 3.9.3 Software Interfaces
-The app will be runnable on Android 4.4 and higher. iOS won't be featured at the moment.
+- Browser-based frontend.
+- RESTful APIs for backend.
+- Automation workflows via n8n.
 
 #### 3.9.4 Communication Interfaces
-The server and hardware will communicate using the http protocol. 
+HTTP/HTTPS protocols for all interactions. 
 
 ### 3.10 Licensing Requirements
+All open-source components used will comply with MIT, Apache, or similar permissive licenses.
 
 ### 3.11 Legal, Copyright, and Other Notices
-The logo is licensed to the Common Playground Team and is only allowed to use for the application. We do not take responsibilty for any incorrect data or errors in the application.
+The GrowKnow logo and brand are reserved for this project. We disclaim responsibility for third-party content accuracy.
 
 ### 3.12 Applicable Standards
 The development will follow the common clean code standards and naming conventions. Also we will create a definition of d which will be added here as soon as its complete.
 
 ## 4. Supporting Information
-For any further information you can contact the Common Playground Team or check our [Common Playground Blog](http://commonplayground.wordpress.com). 
+For any further information you can contact the Common Playground Team or check our [GrowKnow Blog](https://knowgrow7.wordpress.com/). 
 The Team Members are:
-- Celina Adam
-- Inga Batton
-- Nils Krehl 
-- Denis Reibel
+- Joaquin Berriel
+- Emin
+- Roic
 
 <!-- Picture-Link definitions: -->
 [OUCD]: https://github.com/IB-KA/CommonPlayground/blob/master/UseCaseDiagramCP.png "Overall Use Case Diagram"
