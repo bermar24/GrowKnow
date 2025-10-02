@@ -92,10 +92,9 @@ The system will be delivered iteratively:
 
 ### 2.2 Use Case Diagram
 
-![OUCD](./UseCaseDiagramCP.png)
+![OUCD](./GrowKnow_Overal_UML color).png)
 
-- Green: Planned till end of december
-- Yellow: Planned till end of june
+- Yellow: Planned till December
 
 ### 2.3 Technology Stack
 The technology we use is:
@@ -105,7 +104,7 @@ Frontend:
 * React
 
 Backend:
-
+UseCaseDiagramCP.png
 * Node.js (API services)
 * Supabase (Postgres-based DB with authentication)
 
@@ -275,4 +274,4 @@ The Team Members are:
 - Roic
 
 <!-- Picture-Link definitions: -->
-[OUCD]: https://github.com/IB-KA/CommonPlayground/blob/master/UseCaseDiagramCP.png "Overall Use Case Diagram"
+[OUCD]: https://github.com/bermar24/GrowKnow/blob/main/GrowKnow_Overal_UML.png "Overall Use Case Diagram"
