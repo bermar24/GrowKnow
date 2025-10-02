@@ -92,7 +92,7 @@ The system will be delivered iteratively:
 
 ### 2.2 Use Case Diagram
 
-![OUCD](./GrowKnow_Overal_UML color).png)
+![OUCD](./GrowKnow_Overal_UML_color.png)
 
 - Yellow: Planned till December
 
@@ -274,4 +274,4 @@ The Team Members are:
 - Roic
 
 <!-- Picture-Link definitions: -->
-[OUCD]: https://github.com/bermar24/GrowKnow/blob/main/GrowKnow_Overal_UML.png "Overall Use Case Diagram"
+[OUCD]: https://github.com/bermar24/GrowKnow/blob/main/GrowKnow_Overal_UML_color.png "Overall Use Case Diagram"
