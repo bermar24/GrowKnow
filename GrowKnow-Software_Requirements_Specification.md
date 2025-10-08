@@ -141,7 +141,7 @@ Until December (MVP) we plan to implement:
 - 3.1.2 Admin Panel
 - 3.1.3 Manage Database & Pipelines
 - 3.1.4 Search & Filter Tools
-- 3.1.5 Explore Learning Roadmaps
+- 3.1.5 Trigger Newsletter Run (via n8n)
 
 
 For later releases we plan to implement:
@@ -150,13 +150,11 @@ For later releases we plan to implement:
 - 3.1.8 Suggest New Tools/Sources
 - 3.1.9 Provide Feedback / Corrections
 - 3.1.10 Manage Users & Roles
-- 3.1.11 Trigger Newsletter Run (via n8n)
+- 3.1.11 Explore Learning Roadmaps
 - 3.1.12 Review/Edit/Publish Articles
 
 #### 3.1.1 Browse AI News
 Visitors can read and navigate through the latest AI news, which are automatically collected, summarized, and tagged.
-
-This Use Case is specified in a [seperate document](UCs/Browse_AI_News).
 
 #### 3.1.2 Admin Panel
 Admins access a dashboard for managing users, roles, and platform-wide settings.
@@ -169,8 +167,10 @@ Admins ensure the consistency and quality of stored news, tools, and roadmaps wh
 #### 3.1.4 Search & Filter Tools
 Visitors and registered users can search and filter through the AI tool directory using categories, domains, and budget.
 
-#### 3.1.5 Explore Learning Roadmaps
-Users can navigate role-based roadmaps (e.g., Data Engineer, ML Engineer) with structured paths and linked resources.
+#### 3.1.5 Trigger Newsletter Run
+The automation orchestrator (n8n) can initiate newsletter generation and delivery.
+
+This Use Case is specified in a [seperate document](UCs/Trigger_Newslatter).
 
 #### 3.1.6 Subscribe to Newsletter
 Registered users can subscribe to receive the weekly newsletter.
@@ -189,8 +189,8 @@ Registered users can suggest corrections or improvements to existing content.
 #### 3.1.10 Manage Users & Roles
 Admins manage user accounts and assign or revoke roles.
 
-#### 3.1.11 Trigger Newsletter Run
-The automation orchestrator (n8n) can initiate newsletter generation and delivery.
+#### 3.1.11 Explore Learning Roadmaps
+Users can navigate role-based roadmaps (e.g., Data Engineer, ML Engineer) with structured paths and linked resources.
 
 #### 3.1.12 Review/Edit/Publish Articles
 Admins review automatically ingested articles before publishing them.
