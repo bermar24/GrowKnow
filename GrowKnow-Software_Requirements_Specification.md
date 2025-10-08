@@ -92,7 +92,7 @@ The system will be delivered iteratively:
 
 ### 2.2 Use Case Diagram
 
-![OUCD](./GrowKnow_Overal_UML_color.png)
+![OUCD](Diagrams/GrowKnow_Overal_UML_color.png)
 
 - Yellow: Planned till December
 
@@ -138,28 +138,33 @@ This section explains the different use cases shown in the Use Case Diagram and 
 
 Until December (MVP) we plan to implement:
 - 3.1.1 Browse AI News
-- 3.1.2 Subscribe to Newsletter
-- 3.1.3 Receive Weekly Newsletter
+- 3.1.2 Admin Panel
+- 3.1.3 Manage Database & Pipelines
 - 3.1.4 Search & Filter Tools
 - 3.1.5 Explore Learning Roadmaps
 
+
 For later releases we plan to implement:
-- 3.1.6 Suggest New Tools/Sources
-- 3.1.7 Provide Feedback / Corrections
-- 3.1.8 Admin Panel
-- 3.1.9 Manage Database & Pipelines
+- 3.1.6 Subscribe to Newsletter
+- 3.1.7 Receive Weekly Newsletter
+- 3.1.8 Suggest New Tools/Sources
+- 3.1.9 Provide Feedback / Corrections
 - 3.1.10 Manage Users & Roles
 - 3.1.11 Trigger Newsletter Run (via n8n)
 - 3.1.12 Review/Edit/Publish Articles
-- 3.1.1 Browse AI News
 
+#### 3.1.1 Browse AI News
 Visitors can read and navigate through the latest AI news, which are automatically collected, summarized, and tagged.
 
-#### 3.1.2 Subscribe to Newsletter
-Registered users can subscribe to receive the weekly newsletter.
+This Use Case is specified in a [seperate document](UCs/Browse_AI_News).
 
-#### 3.1.3 Receive Weekly Newsletter
-Subscribers receive a curated newsletter summarizing the most relevant AI updates with source transparency.
+#### 3.1.2 Admin Panel
+Admins access a dashboard for managing users, roles, and platform-wide settings.
+
+This Use Case is specified in a [seperate document](UCs/Admin_Panel).
+
+#### 3.1.3 Manage Database & Pipelines
+Admins ensure the consistency and quality of stored news, tools, and roadmaps while managing automation pipelines.
 
 #### 3.1.4 Search & Filter Tools
 Visitors and registered users can search and filter through the AI tool directory using categories, domains, and budget.
@@ -167,17 +172,19 @@ Visitors and registered users can search and filter through the AI tool director
 #### 3.1.5 Explore Learning Roadmaps
 Users can navigate role-based roadmaps (e.g., Data Engineer, ML Engineer) with structured paths and linked resources.
 
-#### 3.1.6 Suggest New Tools/Sources
+#### 3.1.6 Subscribe to Newsletter
+Registered users can subscribe to receive the weekly newsletter.
+
+#### 3.1.7 Receive Weekly Newsletter
+Subscribers receive a curated newsletter summarizing the most relevant AI updates with source transparency.
+
+#### 3.1.8 Suggest New Tools/Sources
 Registered users can propose new tools or sources to be added to the directory.
 
-#### 3.1.7 Provide Feedback / Corrections
+
+#### 3.1.9 Provide Feedback / Corrections
 Registered users can suggest corrections or improvements to existing content.
 
-#### 3.1.8 Admin Panel
-Admins access a dashboard for managing users, roles, and platform-wide settings.
-
-#### 3.1.9 Manage Database & Pipelines
-Admins ensure the consistency and quality of stored news, tools, and roadmaps while managing automation pipelines.
 
 #### 3.1.10 Manage Users & Roles
 Admins manage user accounts and assign or revoke roles.
@@ -274,4 +281,4 @@ The Team Members are:
 - Roic
 
 <!-- Picture-Link definitions: -->
-[OUCD]: https://github.com/bermar24/GrowKnow/blob/main/GrowKnow_Overal_UML_color.png "Overall Use Case Diagram"
+[OUCD]: https://github.com/bermar24/GrowKnow/Diagrams/GrowKnow_Overal_UML_color.png "Overall Use Case Diagram"
