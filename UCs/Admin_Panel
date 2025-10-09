@@ -64,7 +64,7 @@ An admin manages news drafts produced by automation or created manually. The adm
 
 
 ### 2.1.4 Activity Diagram
-![Organization Application Activity Diagram](../Diagrams/UCs/CreateOperationActivityDiagramm.jpg)
+../UCs/Adminpanel_UseCase.png
 
 ### 2.1.5 Mock-up
 (n/a)
