@@ -63,7 +63,8 @@ An admin manages news drafts produced by automation or created manually. The adm
 
 ### 2.1.4 Activity Diagram
 
-<img width="3412" height="5295" alt="Adminpanel_UseCase" src="https://github.com/user-attachments/assets/06bf1275-326c-4159-bcb4-f5b97f58e21d" />
+<img width="3395" height="5296" alt="AdminPanelUseCase" src="https://github.com/user-attachments/assets/5d4980c8-9f2f-463f-a7ef-94d563a86175" />
+
 
 
 ### 2.1.5 Mock-up
