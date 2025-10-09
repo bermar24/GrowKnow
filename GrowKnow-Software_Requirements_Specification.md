@@ -159,7 +159,7 @@ Visitors can read and navigate through the latest AI news, which are automatical
 #### 3.1.2 Admin Panel
 Admins access a dashboard for managing users, roles, and platform-wide settings.
 
-This Use Case is specified in a [seperate document](UCs/Admin_Panel).
+This Use Case is specified in a [seperate document](UCs/AdminPanel.md).
 
 #### 3.1.3 Manage Database & Pipelines
 Admins ensure the consistency and quality of stored news, tools, and roadmaps while managing automation pipelines.
@@ -170,7 +170,7 @@ Visitors and registered users can search and filter through the AI tool director
 #### 3.1.5 Trigger Newsletter Run
 The automation orchestrator (n8n) can initiate newsletter generation and delivery.
 
-This Use Case is specified in a [seperate document](UCs/Trigger_Newslatter).
+This Use Case is specified in a [seperate document](UCs/TriggerNewsletterRun.md).
 
 #### 3.1.6 Subscribe to Newsletter
 Registered users can subscribe to receive the weekly newsletter.
