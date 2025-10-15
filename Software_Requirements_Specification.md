@@ -152,9 +152,10 @@ For later releases we plan to implement:
 - 3.1.10 Manage Users & Roles
 - 3.1.11 Explore Learning Roadmaps
 - 3.1.12 Review/Edit/Publish Articles
+- 3.1.13 Unsubscribe from Newslaetter
 
 #### 3.1.1 Browse AI News
-Visitors can read and navigate through the latest AI news, which are automatically collected, summarized, and tagged.
+Users can read and navigate through the latest AI news, which are automatically collected, summarized, and tagged.
 
 #### 3.1.2 Admin Panel
 Admins access a dashboard for managing users, roles, and platform-wide settings.
@@ -165,7 +166,7 @@ This Use Case is specified in a [seperate document](UCs/AdminPanel.md).
 Admins ensure the consistency and quality of stored news, tools, and roadmaps while managing automation pipelines.
 
 #### 3.1.4 Search & Filter Tools
-Visitors and registered users can search and filter through the AI tool directory using categories, domains, and budget.
+Users can search and filter through the AI tool directory using categories, domains, and budget.
 
 #### 3.1.5 Trigger Newsletter Run
 The automation orchestrator (n8n) can initiate newsletter generation and delivery.
@@ -173,17 +174,17 @@ The automation orchestrator (n8n) can initiate newsletter generation and deliver
 This Use Case is specified in a [seperate document](UCs/TriggerNewsletterRun.md).
 
 #### 3.1.6 Subscribe to Newsletter
-Registered users can subscribe to receive the weekly newsletter.
+Users can subscribe to receive the weekly newsletter.
 
 #### 3.1.7 Receive Weekly Newsletter
-Subscribers receive a curated newsletter summarizing the most relevant AI updates with source transparency.
+Registered Users receive a curated newsletter summarizing the most relevant AI updates with source transparency.
 
 #### 3.1.8 Suggest New Tools/Sources
-Registered users can propose new tools or sources to be added to the directory.
+Users can propose new tools or sources to be added to the directory.
 
 
 #### 3.1.9 Provide Feedback / Corrections
-Registered users can suggest corrections or improvements to existing content.
+Users can suggest corrections or improvements to existing content.
 
 
 #### 3.1.10 Manage Users & Roles
@@ -194,6 +195,9 @@ Users can navigate role-based roadmaps (e.g., Data Engineer, ML Engineer) with s
 
 #### 3.1.12 Review/Edit/Publish Articles
 Admins review automatically ingested articles before publishing them.
+
+#### 3.1.13 Unsubscribe to Newsletter
+Registered users can unsubscribe from receive the weekly newsletter.
 
 ### 3.2 Usability
 We aim to design the GrowKnow platform with a clean, intuitive, and responsive interface. The user experience should feel natural, requiring no special training.
