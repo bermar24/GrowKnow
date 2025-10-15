@@ -89,20 +89,100 @@ Swimlanes: **Admin**, **System**, **OpenSearch**, **Email/ESP**.
 
 ### 2.1.6 Narrative
 ```gherkin
+Feature: Admin Panel - Review, Edit, and Publish News Drafts
+  As an admin
+  I want to manage news drafts
+  So that I can review, edit, publish, or save them
+
+  Background:
+    Given the admin is logged in
+    And the system has validated credentials
+
+  # --- Basic Flow ---
+  Scenario: Admin reviews and publishes a draft
+    When the admin opens the "News drafts" section
+    And drafts are available
+    And the admin opens a draft
+    And the admin reviews and approves the draft
+    And the admin chooses to publish it
+    Then the system publishes the article
+    And the system indexes the content in OpenSearch
+    And the system writes an audit log
+    And the system sends a notification email (if enabled)
+    And the admin returns to the dashboard
+
+  # --- Alternative Flows ---
+  Scenario: Invalid login
+    Given the admin enters invalid credentials
+    Then the system rejects the login and displays an error message
+    When the admin retries with valid credentials
+    Then the system grants access
+
+  Scenario: Admin saves as draft instead of publishing
+    When the admin opens a draft
+    And the admin reviews but does not approve or publish
+    Then the admin saves it as draft
+    And the system stores the draft version and writes an audit log
+
+  Scenario: Empty State - no drafts exist
+    Given there are no existing drafts
+    When the admin opens the "News drafts" section
+    Then the system displays creation options:
+      | Option                     |
+      | Import latest automation output |
+      | Generate now               |
+      | Create manual draft        |
+      | Duplicate last published   |
+      | Adjust filters             |
+
+  Scenario: Notification disabled
+    Given notifications are turned off
+    When the admin publishes an article
+    Then the system indexes and logs the action but skips sending emails
+
+  Scenario: System failure during publishing
+    When a database save or publish error occurs
+    Then the system shows an error message
+    And the draft remains unchanged
 ```
+This Narrative is implemented in a [seperate document](https://github.com/bermar24/GrowNow/blob/main/src/test/resources/features/AdminPanel.feature).
 
 ## 2.2 Alternative Flows
-(n/a)
+### Invalid Login
+- The system rejects invalid credentials and displays an error message.
+- The admin can attempt to log in again.
+
+### Approve = No / Publish = No
+- The admin chooses “Save as draft.”
+- The system stores the draft version, logs the action, and returns to the dashboard.
+
+### Empty State
+When no drafts exist, the system displays available options:
+- Import latest automation output: pulls drafts from n8n inbox.
+- Generate now: triggers n8n run, creates draft on callback.
+- Create manual draft: inserts empty draft.
+- Duplicate last published: copies last article as a new draft.
+
+### Notification Off
+- The system skips sending email/ESP notifications, but indexing and audit logging still occur.
 
 # 3 Special Requirements
-(n/a)
+- The system must index published content in OpenSearch.
+- Audit logs must be written for every draft edit, save, or publish action.
+- The system must support optional notifications via email/ESP.
+- Draft editing must allow inline content changes with validation.
+- The system must handle automated drafts via n8n workflow integration.
 
 # 4 Preconditions
 ## 4.1 Login
-The user has to be logged in to the system.
+- Admin must have valid credentials.
 
 # 5 Postconditions
-(n/a)
+- If published: content is live on the website, indexed in OpenSearch, audit logs written, notifications sent if enabled.
+- If saved as draft: new draft version is stored and visible in the draft list.
 
 # 6 Extension Points
-(n/a)
+- Integration with n8n workflows for automated content ingestion.
+- Optional notification system integration via email/ESP.
+- OpenSearch indexing for searchability of published articles.
+- Audit logging for compliance and tracking changes.

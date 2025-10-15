@@ -107,20 +107,62 @@ n8n runs on a fixed schedule and generates a news article draft from vetted sour
 
 ### 2.1.8 Narrative
 ```gherkin
+Feature: Trigger Newsletter Run (Automation → Review → Publish)
+  As an admin
+  I want to review and publish automatically generated newsletter drafts
+  So that vetted news articles are published efficiently
+
+  Background:
+    Given the admin is logged in
+
+  Scenario: Automated newsletter draft generation and publication
+    # Automation (n8n)
+    Given the system runs the scheduled n8n workflow
+    When the workflow fetches sources, deduplicates items, extracts key points, classifies and tags news
+    And generates a news article draft
+    Then the draft is sent to the system
+
+    # System intake
+    When the system stores the draft in the database
+    And indexes the draft for search
+    And queues the draft for review
+    And notifies the admin
+
+    # Admin review and publish
+    When the admin opens the review link
+    And reviews the draft
+    And approves the draft
+    And clicks publish
+    Then the system publishes the article to the website
+    And logs run metrics including timestamps, items processed, dedupe count, review latency, and publish status
 ```
+This Narrative is specified in a [seperate document](https://github.com/bermar24/GrowNow/blob/main/src/test/resources/features/trigger_newsletter_run.feature).
 
 ## 2.2 Alternative Flows
-(n/a)
+### Approve = No
+The admin decides not to approve the draft. The admin may edit the draft and return it to the review queue for another approval cycle.
+
+### Notification not received
+If the admin does not receive the notification, the draft remains in the review queue. The admin can access it from the dashboard and continue the review.
+
+### Minor edits before publish
+The admin makes minor adjustments after opening the review link. Once edits are complete, the admin approves the draft for publication.
+
 
 # 3 Special Requirements
-(n/a)
+- The scheduling interval of the n8n workflow must be configurable between 12 and 24 hours.
+- The review link should open the draft in an editor in a single click.
+- All metrics must be recorded and queryable for reporting purposes, including processed items, deduplication, and review latency.
+- System must handle failures gracefully (e.g., skipped indexing, notification failures, or validation errors).
 
 # 4 Preconditions
 ## 4.1 Login
-The user has to be logged in to the system.
+The admin must be logged into the system to access review and publishing functionalities
 
 # 5 Postconditions
-(n/a)
+- Draft is either published on the website or remains in the review queue if approval is deferred.
+- Search index updated 
+- Run metrics logged, including timestamps, and publish status.
 
 # 6 Extension Points
 (n/a)
