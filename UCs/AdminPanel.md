@@ -1,74 +1,91 @@
 # 1 Use-Case Name
+
 Admin Panel: Review, Edit, and Publish News Drafts
 
 ## 1.1 Brief Description
-An admin manages news drafts produced by automation or created manually. The admin can browse drafts, review and edit content, approve and publish, or save updates as draft. If no drafts exist, the admin can import automation output, trigger on-demand generation, create a manual draft, duplicate the last published article, or adjust filters. The system indexes published content and can notify admin.
+
+An admin manages news drafts from automation or manual creation. They can browse, open, review, edit, approve, publish, or save as draft. If no drafts exist the system shows options. Published content is indexed. Notification is optional.
+
+---
 
 # 2 Flow of Events
 
 ## 2.1 Basic Flow
-1. **Admin:** clicks **Log in**.  
-2. **System:** checks credentials → if valid shows **Admin Dashboard**.  
-3. **Admin:** chooses **News drafts**.  
-4. **System:** **loads draft list and history** → decision **Drafts loaded?**  
-5. **Yes-Pfad:**  
-   5.1 **Admin:** opens a draft.  
-   5.2 **System:** shows selected draft.  
-   5.3 **Admin:** reviews and edits.  
-   5.4 **Decision:** **Approve?**  
-       - **No:** go to Alt-Flow “Approve = No”.  
-       - **Yes:** continue.  
-   5.5 **Decision:** **Publish?**  
-       - **No:** go to Alt-Flow “Approve = No”.  
-       - **Yes:** **Admin:** clicks **Publish article**.  
-   5.6 **System:** **Publish to website** → **Index content (OpenSearch)** → **Write audit log** → **Notify (Email/ESP, optional)**.  
-   5.7 **System:** return to **Dashboard**.
 
-## 2.1.1 Alternative Flows
-- **Invalid login**  
-  - **System:** rejects credentials and shows error.  
-  - **Admin:** reattempts login.
+1. **Admin:** Log in.
+2. **System:** Check credentials. If valid show Admin Dashboard.
+3. **Admin:** Choose “News drafts.”
+4. **System:** Load draft list and history. Decision: *Drafts loaded?*
 
-- **Approve = No** (oder Publish? = No)  
-  - **Admin:** selects **Save as draft**.  
-  - **System:** **store draft version**, **write audit log**, return to dashboard.
+   * **Yes:** continue to 5.
+   * **No:** go to Alt Flow “Empty State.”
+5. **Admin:** Open a draft.
+6. **System:** Show selected draft.
+7. **Admin:** Review and edit.
+8. **Decision: Approve?**
 
-- **No drafts available (empty state)**  
-  - **System:** shows options → decision **Which option chosen?**  
-    - **Import latest automation output**  
-      - **System:** pulls from **n8n inbox** → **creates draft** → **opens editor**.  
-    - **Generate now**  
-      - **Admin:** triggers **n8n run** → **System:** stores **run id** → on callback **creates draft** → **opens editor**.  
-    - **Create manual draft**  
-      - **System:** **insert draft** → **opens editor**.  
-    - **Duplicate last published**  
-      - **System:** **copies last article as draft** → **opens editor**.  
-    - **Adjust filters**  
-      - **Admin:** **reset filters** → **System:** **reloads list**.
+   * **No:** go to Alt Flow “Approve = No.”
+   * **Yes:** continue.
+9. **Decision: Publish?**
 
-- **Notification off**  
-  - **Admin/System:** skip email step; indexing und audit bleiben.
+   * **No:** go to Alt Flow “Approve = No.”
+   * **Yes:** **Admin:** Click “Publish article.”
+10. **System:** Publish to website → **OpenSearch:** Index content → **System:** Write audit log → **Email/ESP optional:** Notify.
+11. **System:** Return to Dashboard.
 
-- **System failures**  
-  - **DB save/publish error:** show error; draft unverändert.  
-  - **Automation unavailable (import/generate):** show fallback; biete manuellen Draft oder Duplikat.
+### 2.1.1 Alternative Flows
+
+**A. Invalid login**
+
+* **System:** Reject credentials and show error.
+* **Admin:** Reattempt login.
+
+**B. Approve = No or Publish = No**
+
+* **Admin:** Select “Save as draft.”
+* **System:** Store draft version. Write audit log. Return to dashboard.
+
+**C. Empty State**
+
+* **System:** Show options. Decision: *Which option?*
+
+  1. **Import latest automation output** → **System:** Pull from n8n inbox. Create draft. Open editor.
+  2. **Generate now** → **Admin:** Trigger n8n run → **System:** Store run id → On callback create draft. Open editor.
+  3. **Create manual draft** → **System:** Insert empty draft. Open editor.
+  4. **Duplicate last published** → **System:** Copy last article as draft. Open editor.
+  5. **Adjust filters** → **Admin:** Reset filters → **System:** Reload list.
+
+**D. Notification off**
+
+* **Admin/System:** Skip email step. Indexing and audit remain.
+
+**E. System failures**
+
+* **DB save or publish error:** Show error. Draft unchanged.
+* **Automation unavailable:** Show fallback. Offer manual draft or duplicate.
 
 ## 2.1.2 Postconditions
-- Bei Publish: Artikel live, index aktualisiert, Audit geschrieben, ggf. Benachrichtigung gesendet.  
-- Bei Save as draft: neuer Draft-Stand versioniert gespeichert, in Liste sichtbar.
+
+* **Publish:** Article live. Index updated. Audit written. Notification sent if enabled.
+* **Save as draft:** New version stored and visible in list.
 
 ## 2.1.3 Termination
-- **Admin:** optional **Log out**.
 
+* **Admin:** Optional log out.
+
+## 2.1.4 Activity Diagram
+
+Swimlanes: **Admin**, **System**, **OpenSearch**, **Email/ESP**.
 
 ### 2.1.4 Activity Diagram
 
-<img width="3395" height="5296" alt="AdminPanelUseCase" src="https://github.com/user-attachments/assets/5d4980c8-9f2f-463f-a7ef-94d563a86175" />
-
-
+<img width="3454" height="3956" alt="UseCaseAdminLoggedIn" src="https://github.com/user-attachments/assets/686979f2-cc11-408a-8278-453eae655ad7" />
 
 ### 2.1.5 Mock-up
-(n/a)
+
+<img width="3226" height="3622" alt="Group 2" src="https://github.com/user-attachments/assets/462c742c-c9f8-49c4-88d1-b3d33002a5a8" />
+
+
 
 ### 2.1.6 Narrative
 ```gherkin
